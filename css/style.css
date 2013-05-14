@@ -1,0 +1,91 @@
+.container{
+	width: 700px;
+	height: 700px;
+	margin:0 auto;
+	background-color: #e4e4e4;
+	position: relative;
+	overflow: visible;
+}
+.title{
+	font-size: 25px;
+	font:Arial;
+	font-weight: bold;
+}
+.operateZone{
+	position: absolute;
+	top: 10px;
+	left: 400px;
+}
+.operateZone .btn{
+	width:80px;
+	height:30px;
+	font-size: 20px;
+	font-weight: bold;
+}
+.type{
+	position: absolute;
+	top: 60px;
+	left: -170px;
+	width: 160px;
+	border: 0px solid red;
+}
+.type .item{
+	padding-top: 20px;
+	font-size: 15px;
+	font:Arial;
+	font-weight: bold;
+}
+.type .item .chooseType{
+	cursor: default;
+}
+.setting{
+	position: absolute;
+	top: 430px;
+	left: -170px;
+	width: 160px;
+	border: 0px solid red;
+}
+.setting .item{
+	padding-top: 20px;
+	font-size: 15px;
+	font:Arial;
+	font-weight: bold;
+}
+.setting .item .changeSetting{
+	cursor: default;
+}
+.rank{
+	position: absolute;
+	top: 60px;
+	right: -220px;
+	border:0px solid red;
+}
+
+.rank #rankCanvas{
+	margin-top: 10px;
+}
+
+#myCanvas{
+	overflow: visible;
+	position: absolute;
+	top: 60px;
+	left: 40px;
+}
+#myCanvas1{
+	overflow: visible;
+	position: absolute;
+	top: 60px;
+	left: 40px;
+}
+#myCanvas2{
+	overflow: visible;
+	position: absolute;
+	top: 60px;
+	left: 40px;
+}
+#timeCanvas{
+	overflow: visible;
+	position: absolute;
+	top: 10px;
+	left: 250px;
+}
