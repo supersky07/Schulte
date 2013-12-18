@@ -24,57 +24,60 @@ var dataObj = {
 	'elements1':{
 		width_num: 4,
 		height_num: 4,
-		height: 130,
-		width: 130,
+		//height: 130,
+		//width: 130,
 		font_size : 80
 	},
 	'elements2':{
 		width_num: 4,
 		height_num: 4,
-		height: 130,
-		width: 130,
+		//height: 130,
+		//width: 130,
 		font_size : 70
 	},
 	'num1': {
 		width_num: 4,
 		height_num: 4,
-		height: 130,
-		width: 130,
-		font_size : 80
+		//height: 130,
+		//width: 130,
+		font_size : 80,
+		extend : 1.4
 	},
 	'num2': {
 		width_num: 5,
 		height_num: 5,
-		height: 110,
-		width: 110,
-		font_size : 70
+		//height: 110,
+		//width: 110,
+		font_size : 70,
+		extend : 1
 	},
 	'num3': {
 		width_num: 6,
 		height_num: 6,
-		height: 90,
-		width: 90,
-		font_size : 60
+		//height: 90,
+		//width: 90,
+		font_size : 60,
+		extend : 0.9
 	},
 	'letter1': {
 		width_num: 5,
 		height_num: 5,
-		height: 110,
-		width: 110,
+		//height: 110,
+		//width: 110,
 		font_size : 70
 	},
 	'letter2': {
 		width_num: 5,
 		height_num: 5,
-		height: 110,
-		width: 110,
+		//height: 110,
+		//width: 110,
 		font_size : 70
 	},
 	'dynasty': {
 		width_num: 5,
 		height_num: 5,
-		height: 120,
-		width: 120,
+		//height: 120,
+		//width: 120,
 		font_size : 50
 	}
 };
@@ -116,6 +119,9 @@ var bindDom = function (){
 		}else if(ev.offsetX || ev.offsetX==0){
 			mouseX = ev.offsetX;
 			mouseY = ev.offsetY;
+		}else if(ev.pageX || ev.pageX == 0){
+			mouseX = ev.pageX - $("#myCanvas").offset().left;
+			mouseY = ev.pageY - $("#myCanvas").offset().top;
 		}
 
 		indexI = parseInt(mouseY / (opts.item_height + opts.item_spacing));
@@ -195,26 +201,33 @@ var initOpts = function(){
 	if (screen.width <= 640){
 		opts.rate = 0.7;
 		opts.container_width = 580;
+		opts.container_height = 580;
 	}else if (screen.width > 640 && screen.width <= 800){
 		opts.rate = 0.8;
 		opts.container_width = 630;
+		opts.container_height = 630;
 	}else if (screen.width > 800 && screen.width <= 1024){
 		opts.rate = 0.9;
 		opts.container_width = 630;
+		opts.container_height = 630;
 	}else{
+		opts.container_width = 630;
+		opts.container_height = 630;
 	}
 
 	//根据每行数量初始化 item宽度和高度
 	opts.item_width_num = dataObj[opts.type].width_num;
 	opts.item_height_num = dataObj[opts.type].height_num;
-	opts.item_width = dataObj[opts.type].width * opts.rate;
-	opts.item_height = dataObj[opts.type].height * opts.rate;
+	//opts.item_width = dataObj[opts.type].width * opts.rate;
+	//opts.item_height = dataObj[opts.type].height * opts.rate;
+	opts.item_width = (opts.container_width - 80 - opts.item_spacing * (opts.item_width_num - 1))/opts.item_width_num ;
+	opts.item_height = (opts.container_height - 80 - opts.item_spacing * (opts.item_height_num - 1))/opts.item_height_num ;
 
 	opts.item_total_width = opts.item_width * opts.item_width_num + opts.item_spacing * (opts.item_width_num - 1);
 	opts.item_total_height = opts.item_height * opts.item_height_num + opts.item_spacing * (opts.item_height_num - 1);
 
-	opts.container_width = opts.item_width * opts.item_width_num + opts.item_spacing * (opts.item_width_num - 1) + 80;
-	opts.container_height = opts.item_height * opts.item_height_num + opts.item_spacing * (opts.item_height_num - 1) + 80; 
+	//opts.container_width = opts.item_width * opts.item_width_num + opts.item_spacing * (opts.item_width_num - 1) + 80;
+	//opts.container_height = opts.item_height * opts.item_height_num + opts.item_spacing * (opts.item_height_num - 1) + 80; 
 	opts.item_total_num = opts.item_width_num * opts.item_height_num;
 
 	stack.length = 0;
@@ -260,23 +273,25 @@ var initCanvas = function (){
 			//++++++++根据显示的内容不同，设置不同的偏移值+++++++++++++++++
 			if(opts.type == 'num1' || opts.type == 'num2' || opts.type == 'num3'){
 				if(value < 10){
-					temp_left = j * (opts.item_width + opts.item_spacing) + 30;
+					temp_left = j * (opts.item_width + opts.item_spacing) + 35 * dataObj[opts.type].extend;
 				}else if(value >= 10 && value < 20){
-					temp_left = j * (opts.item_width + opts.item_spacing) + 25;
+					temp_left = j * (opts.item_width + opts.item_spacing) + 13 * dataObj[opts.type].extend;
 				}else{
-					temp_left = j * (opts.item_width + opts.item_spacing) + 20;
+					temp_left = j * (opts.item_width + opts.item_spacing) + 13 * dataObj[opts.type].extend;
 				}
 			}else if(opts.type == 'dynasty'){
 				if(value == '尧' || value == '舜' || value == '禹'){
-					temp_left = j * (opts.item_width + opts.item_spacing) + 40;
+					temp_left = j * (opts.item_width + opts.item_spacing) + 30;
 				}else{
-					temp_left = j * (opts.item_width + opts.item_spacing) + 10;
+					temp_left = j * (opts.item_width + opts.item_spacing) + 5;
 				}
 			}else{
 				temp_left = j * (opts.item_width + opts.item_spacing) + 30;
 			}
 			if(opts.type == 'num3'){
 				temp_top = i * (opts.item_height + opts.item_spacing) + 60;
+			}else if(opts.type == 'num1' || opts.type == 'elements1' || opts.type == 'elements2'){
+				temp_top = i * (opts.item_height + opts.item_spacing) + 100;
 			}else{
 				temp_top = i * (opts.item_height + opts.item_spacing) + 80;
 			}
@@ -293,7 +308,7 @@ var initCanvas = function (){
 				ctx1.fillStyle = "black";
 			}
 
-			ctx1.font = dataObj[opts.type].font_size + " Georgia";
+			ctx1.font = Math.floor(dataObj[opts.type].font_size * opts.rate) + "px Arial";
 			ctx1.fillText(value.toString(), temp_left, temp_top);
 		}
 	}
@@ -374,7 +389,7 @@ var pubFuns = {
 		t = null;
 	},
 	updateRankListAjax : function(){
-		$.ajax({ 
+		$.ajax({
 			url: "getRankListData.php?type=" + opts.type, 
 			success: function(data){
 				pubFuns.updateRankList(data);
@@ -437,7 +452,7 @@ var pubFuns = {
 	         }
 
 	         $.ajax({ 
-				url: "addRankData.php?name=" + realName + "&time=" + time + "&type=" + opts.type + "&mark=" + mark, 
+				url: "addRankData.php?name=" + realName + "&time=" + time + "&type=" + opts.type + "&mark=" + mark + "&variableColor=" + setting.variableColor, 
 				success: function(data){
 					$("#reDraw").trigger("click");
 				},

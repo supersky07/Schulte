@@ -37,11 +37,11 @@
 				</div>
 				<div class="item">
 					<input type="radio" name="type" value="elements1" id="elements1">
-					<span class="chooseType">元素前25（汉字）</span>
+					<span class="chooseType">元素前16（汉字）</span>
 				</div>
 				<div class="item">
 					<input type="radio" name="type" value="elements2" id="elements2">
-					<span class="chooseType">元素前25（字母）</span>
+					<span class="chooseType">元素前16（字母）</span>
 				</div>
 			</div>
 			<div class="setting">
